@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const multer = require("multer");
 const path = require("path");
+const jwt = require("jsonwebtoken"); 
 const FormDataModel = require("./models/FormData");
 const CartModel = require("./models/cartSchema");
 const nodemailer = require("nodemailer");
@@ -38,6 +39,24 @@ const storage = multer.diskStorage({
     cb(null, file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname));
   },
 });
+
+const jwtSecretKey = process.env.JWT_SECRET_KEY || 'defaultSecretKey';
+
+const authenticateUser = async (email, password) => {
+  const user = await FormDataModel.findOne({ email: email });
+
+  if (user && await bcrypt.compare(password, user.password)) {
+    return user;
+  }
+
+  return null;
+};
+
+
+const generateToken = (userId) => {
+  return jwt.sign({ userId }, jwtSecretKey, { expiresIn: '1h' });
+};
+
 
 const upload = multer({ storage: storage });
 
@@ -80,19 +99,22 @@ app.post("/register", upload.single("image"), async (req, res) => {
   }
 });
 
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  FormDataModel.findOne({ email: email }).then((user) => {
+
+  try {
+    const user = await authenticateUser(email, password);
+
     if (user) {
-      if (user.password === password) {
-        res.json({ status: "Success", userId: user._id });
-      } else {
-        res.json("Wrong password");
-      }
+      const token = generateToken(user._id);
+      res.json({ status: "Success", userId: user._id, token });
     } else {
-      res.json("No records found!");
+      res.json({ status: "Error", message: "Incorrect password or email" });
     }
-  });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
 app.get("/user/:id", (req, res) => {

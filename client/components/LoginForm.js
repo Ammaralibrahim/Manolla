@@ -20,6 +20,8 @@ export default function LoginForm() {
       .post("http://localhost:3001/login", { email, password })
       .then((result) => {
         if (result.data.status === "Success") {
+          // Token'i bir cookie'ye kaydet
+          Cookies.set("token", result.data.token);
           // Store user ID in a cookie
           Cookies.set("userId", result.data.userId);
 
@@ -31,7 +33,6 @@ export default function LoginForm() {
       })
       .catch((err) => console.log(err));
   };
-
 
   return (
     <>

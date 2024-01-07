@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import Link from "next/link";
+import { useRouter } from 'next/navigation'
 import "react-toastify/dist/ReactToastify.css";
 
 export default function SignupForm() {
@@ -38,6 +40,7 @@ export default function SignupForm() {
           toast.error("E-mail already registered! Please Login to proceed.");
         } else {
           toast.success("Registered successfully! Please Login to proceed.");
+          router.push('/home');
         }
       })
       .catch((err) => console.log(err));
@@ -147,9 +150,9 @@ export default function SignupForm() {
         </div>
         <p className="text-center text-black  text-xs">
           You don't have an account?{" "}
-          <a href="/login" className="text-sky-500">
+          <Link href="/login" className="text-sky-500">
             Login
-          </a>
+          </Link>
         </p>
       </form>
     </>

@@ -1,4 +1,5 @@
 import LoginForm from "../../components/LoginForm";
+import Link from "next/link";
 
 export default function Login() {
   return (
@@ -22,7 +23,7 @@ export default function Login() {
             className="absolute lg:hidden z-10 inset-0 bg-black bg-no-repeat bg-cover items-center"
             style={{
               backgroundImage:
-                "url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80)",
+                "url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auhref=format&fit=crop&w=675&q=80)",
             }}
           >
             <div className="absolute bg-black opacity-60 inset-0 z-0"></div>

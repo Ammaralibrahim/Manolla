@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie"; // Import js-cookie
+import Link from "next/link";
 
 function Header() {
   const [user, setUser] = useState({});
@@ -9,8 +10,8 @@ function Header() {
   const [showUser, setShowUser] = useState(false);
 
   useEffect(() => {
+    // Fetch user information only if the user is authenticated
     if (userId) {
-      // Fetch user information using the stored user ID
       axios
         .get(`http://localhost:3001/user/${userId}`)
         .then((response) => {
@@ -38,11 +39,6 @@ function Header() {
     setShowUser(!showUser);
   };
 
-  const handleSearch = (e) => {
-    const searchTerm = e.target.value;
-    console.log("Aranan: ", searchTerm);
-  };
-
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
   };
@@ -54,6 +50,12 @@ function Header() {
     setCartItems(updatedCart);
   };
 
+  const handleLogout = () => {
+    // Clear user-related cookies and redirect to the login page
+    Cookies.remove("userId");
+    Cookies.remove("token");
+    window.location.href = "/login";
+  };
   return (
     <header className="bg-[white]">
       <div className="container mx-auto px-6 py-7">
@@ -81,12 +83,12 @@ function Header() {
             </svg>
             <span className="mx-1 text-sm">{user.location}</span>
           </div>
-          <a
+          <Link
             href="/home"
             className="w-full text-black md:text-center text-2xl font-semibold"
           >
             Manolla
-          </a>
+          </Link>
           <div className="flex items-center justify-end w-full">
             <button
               onClick={toggleCart}
@@ -113,7 +115,7 @@ function Header() {
                 <img
                   src={`http://localhost:3001/${user.image}`}
                   alt="User Avatar"
-                  className="w-40 "
+                  className="w-40"
                 />
               </div>
               <div className="">
@@ -124,16 +126,16 @@ function Header() {
                   {user.email}
                 </div>
                 {showUser && (
-                  <div className="bg-white absolute top-16 right-4   mt-1 w-48 p-2 border rounded-lg shadow-md">
-                  <div>
-                    <img
-                  src={`http://localhost:3001/${user.image}`}
-                  alt="User Avatar"
-                  className="w-20 rounded-full"
-                />
+                  <div className="bg-white absolute top-16 right-4   mt-1 w-48 p-2 border   shadow-md">
+                    <div>
+                      <img
+                        src={`http://localhost:3001/${user.image}`}
+                        alt="User Avatar"
+                        className="w-20 rounded-full"
+                      />
                     </div>
                     <div className="text-xs text-black">Name: {user.name}</div>
-                    
+
                     <div className="text-xs text-black">
                       Lastname: {user.lastname}
                     </div>
@@ -175,26 +177,25 @@ function Header() {
           }
         >
           <div className="flex flex-col sm:flex-row">
-            <a
+            <Link
               className="mt-3 text-black hover:underline sm:mx-3 sm:mt-0"
               href="/home"
             >
               Home
-            </a>
-            <a
+            </Link>
+            <Link
               className="mt-3 text-black hover:underline sm:mx-3 sm:mt-0"
               href="/shop"
             >
               Shop
-            </a>
-          
-            <a
+            </Link>
+
+            <Link
               className="mt-3 text-black hover:underline sm:mx-3 sm:mt-0"
               href="/contact"
             >
               Contact
-            </a>
-            
+            </Link>
           </div>
         </nav>
         <div className="relative mt-6 max-w-lg mx-auto"></div>
@@ -222,9 +223,9 @@ function Header() {
           {cartItems.length === 0 ? (
             <p>
               Your Cart is empety visit{" "}
-              <a href="/shop" className="text-sky-500 underline">
+              <Link href="/shop" className="text-sky-500 underline">
                 Shop Page
-              </a>{" "}
+              </Link>{" "}
               for Shopping{" "}
             </p>
           ) : (

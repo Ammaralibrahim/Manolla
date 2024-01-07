@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { toast, ToastContainer } from "react-toastify";
+import Link from "next/link";
 import "react-toastify/dist/ReactToastify.css";
 
 function Header({ cartItems, setCartItems }) {
@@ -62,7 +63,7 @@ function Header({ cartItems, setCartItems }) {
 
           // Show success toast
           toast.success("Shopping cart submitted successfully", {
-            position: "top-right",
+            position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -75,7 +76,7 @@ function Header({ cartItems, setCartItems }) {
 
           // Show error toast
           toast.error("Error submitting shopping cart", {
-            position: "top-right",
+            position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -87,8 +88,8 @@ function Header({ cartItems, setCartItems }) {
   };
 
   return (
-    <header className="bg-[white] text-black">
-      <div className="container mx-auto px-6 py-3">
+    <header className="bg-[white]">
+      <div className="container mx-auto px-6 py-7">
         <div className="flex items-center justify-between">
           <div className="hidden w-full text-black md:flex md:items-center">
             {/* SVG ve diğer üst bilgi içeriği */}
@@ -113,18 +114,16 @@ function Header({ cartItems, setCartItems }) {
             </svg>
             <span className="mx-1 text-sm">{user.location}</span>
           </div>
-          <div className="w-full text-black md:text-center text-2xl font-semibold">
-            <a
-              href=""
-              className="w-full text-black md:text-center text-2xl font-semibold"
-            >
-              Manolla
-            </a>
-          </div>
+          <Link
+            href="/home"
+            className="w-full text-black md:text-center text-2xl font-semibold"
+          >
+            Manolla
+          </Link>
           <div className="flex items-center justify-end w-full">
             <button
               onClick={toggleCart}
-              className="text-black focus:outline-none mx-4 mr-6 relative"
+              className="text-black focus:outline-none mx-4 mr-6"
             >
               {/* Cart simgesi SVG */}
               <svg
@@ -138,13 +137,7 @@ function Header({ cartItems, setCartItems }) {
               >
                 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
-              {cartItemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-green-500 text-[#212529] rounded-full h-4 w-4 text-xs flex items-center justify-center">
-                  {cartItemCount}
-                </span>
-              )}
             </button>
-
             <div
               className="flex items-center space-x-4 mr-2"
               onClick={toggleUser}
@@ -153,19 +146,16 @@ function Header({ cartItems, setCartItems }) {
                 <img
                   src={`http://localhost:3001/${user.image}`}
                   alt="User Avatar"
-                  className="w-40 "
+                  className="w-40"
                 />
               </div>
               <div className="">
-                <div className="hidden sm:block">
-                  <div className="text-xs cursor-pointer hover:underline">
-                    {user.name}
-                  </div>
-                  <div className="text-xs text-black cursor-pointer hover:underline">
-                    {user.email}
-                  </div>
+                <div className="text-xs cursor-pointer hover:underline">
+                  {user.name}
                 </div>
-
+                <div className="text-xs text-black cursor-pointer hover:underline">
+                  {user.email}
+                </div>
                 {showUser && (
                   <div className="bg-white absolute top-16 right-4   mt-1 w-48 p-2 border rounded-lg shadow-md">
                     <div>
@@ -218,18 +208,28 @@ function Header({ cartItems, setCartItems }) {
           }
         >
           <div className="flex flex-col sm:flex-row">
-            <a className="mt-3 text-black  sm:mx-3 sm:mt-0" href="/home">
+            <Link
+              className="mt-3 text-black hover:underline sm:mx-3 sm:mt-0"
+              href="/home"
+            >
               Home
-            </a>
-            <a className="mt-3 text-black  sm:mx-3 sm:mt-0" href="/shop">
+            </Link>
+            <Link
+              className="mt-3 text-black hover:underline sm:mx-3 sm:mt-0"
+              href="/shop"
+            >
               Shop
-            </a>
+            </Link>
 
-            <a className="mt-3 text-black  sm:mx-3 sm:mt-0" href="#">
+            <Link
+              className="mt-3 text-black hover:underline sm:mx-3 sm:mt-0"
+              href="/contact"
+            >
               Contact
-            </a>
+            </Link>
           </div>
         </nav>
+        <div className="relative mt-6 max-w-lg mx-auto"></div>
       </div>
       {cartOpen && (
         <div className="fixed inset-y-0 right-0 w-full sm:w-1/5 bg-[white] shadow-lg p-4 text-black">
@@ -275,7 +275,7 @@ function Header({ cartItems, setCartItems }) {
                     </div>
                     <button
                       onClick={() => removeFromCart(item)}
-                      className="text-black border border-black bg-white font-normal rounded-xs text-sm px-2 py-1 focus:outline-none"
+                      className="text-black border border-black bg-white font-normal   text-sm px-2 py-1 focus:outline-none"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -306,7 +306,7 @@ function Header({ cartItems, setCartItems }) {
       )}
 
       <ToastContainer
-        position="top-right"
+        position="bottom-right"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}

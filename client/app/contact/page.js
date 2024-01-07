@@ -4,6 +4,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Header from "../../components/Header";
 import { toast, ToastContainer } from "react-toastify";
+import Link from "next/link";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
@@ -118,7 +119,7 @@ export default function Home() {
           </form>
         </div>
       </section>
-      <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="bottom-right" autoClose={3000} />
 
     </>
   );

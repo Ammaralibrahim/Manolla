@@ -4,6 +4,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Header from "../../components/Header";
 import Products from "./products";
+import Link from "next/link";
 import SportShoesSVG from "./svg/SportShoesSVG";
 import BackpackSVG from "./svg/BackpackSVG";
 import GamesSVG from "./svg/GamesSVG";
@@ -37,7 +38,7 @@ export default function Home() {
             <p className="max-w-2xl mb-6 font-light text-black lg:mb-8 md:text-lg lg:text-xl">
               The Man of the House
             </p>
-            <a
+            <Link
               href="#"
               className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base text-white font-medium text-center rounded-lg bg-black hover:bg-white hover:text-black focus:ring-4 focus:ring-black"
             >
@@ -54,13 +55,13 @@ export default function Home() {
                   clipRule="evenodd"
                 />
               </svg>
-            </a>
-            <a
+            </Link>
+            <Link
               href="#"
               className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center border border-black rounded-lg hover:bg-black hover:text-white focus:ring-4 focus:ring-black"
             >
               Speak to Sales
-            </a>
+            </Link>
           </div>
           <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
             <img
@@ -73,10 +74,10 @@ export default function Home() {
 
       <div className="container px-4 bg-white">
         <div
-          className="h-64 rounded-md overflow-hidden bg-cover bg-center"
+          className="h-64   overflow-hidden bg-cover bg-center"
           style={{
             backgroundImage:
-              'url("https://images.unsplash.com/photo-1577655197620-704858b270ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1280&q=144")',
+              'url("https://images.unsplash.com/photo-1577655197620-704858b270ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auhref=format&fit=crop&w=1280&q=144")',
           }}
         >
           <div className="bg-black bg-opacity-50 flex items-center h-full">
@@ -97,10 +98,10 @@ export default function Home() {
         </div>
         <div className="md:flex mt-8 md:-mx-4">
           <div
-            className="w-full h-64 md:mx-4 rounded-md overflow-hidden bg-cover bg-center md:w-1/2"
+            className="w-full h-64 md:mx-4   overflow-hidden bg-cover bg-center md:w-1/2"
             style={{
               backgroundImage:
-                'url("https://images.unsplash.com/photo-1547949003-9792a18a2601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80")',
+                'url("https://images.unsplash.com/photo-1547949003-9792a18a2601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auhref=format&fit=crop&w=750&q=80")',
             }}
           >
             <div className="bg-black bg-opacity-50 flex items-center h-full">
@@ -121,10 +122,10 @@ export default function Home() {
             </div>
           </div>
           <div
-            className="w-full h-64 mt-8 md:mx-4 rounded-md overflow-hidden bg-cover bg-center md:mt-0 md:w-1/2"
+            className="w-full h-64 mt-8 md:mx-4   overflow-hidden bg-cover bg-center md:mt-0 md:w-1/2"
             style={{
               backgroundImage:
-                'url("https://images.unsplash.com/photo-1486401899868-0e435ed85128?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80")',
+                'url("https://images.unsplash.com/photo-1486401899868-0e435ed85128?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auhref=format&fit=crop&w=1050&q=80")',
             }}
           >
             <div className="bg-black bg-opacity-50 flex items-center h-full">
